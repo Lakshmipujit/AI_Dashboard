@@ -1,16 +1,153 @@
-# React + Vite
+# AI Agent Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+AI Agent Dashboard is a simple React-based web application designed for busy IT professionals. It provides a single interface to view useful information, manage tasks, and interact with an AI assistant.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The project demonstrates frontend development, API integration, task management, deployment, and AI integration concepts.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+### Weather Widget
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* Displays current weather information.
+* Fetches live weather data using an external API.
+
+### Tech News Section
+
+* Displays technology-related news updates.
+* Demonstrates API integration and data handling.
+
+### Task Manager
+
+* Add and manage daily tasks.
+* Simple productivity tool within the dashboard.
+
+### AI Assistant
+
+* Backend API endpoint for AI-powered responses.
+* Uses OpenAI API integration through Express.js.
+
+---
+
+## Tech Stack
+
+### Frontend
+
+* React.js
+* Vite
+* JavaScript
+* CSS
+
+### Backend
+
+* Node.js
+* Express.js
+* OpenAI API
+
+### Deployment
+
+* Vercel
+
+---
+
+## Project Structure
+
+ai-dashboard/
+
+├── src/
+
+│ ├── App.jsx
+
+│ └── main.jsx
+
+├── public/
+
+├── server.js
+
+├── package.json
+
+└── README.md
+
+---
+
+## Installation
+
+### Clone Repository
+
+git clone <repository-url>
+
+cd ai-dashboard
+
+### Install Dependencies
+
+npm install
+
+### Start Frontend
+
+npm run dev
+
+### Start Backend
+
+node server.js
+
+---
+
+## How It Works
+
+1. The React frontend displays dashboard widgets.
+2. Weather and news sections fetch data from external APIs.
+3. Users can create and manage tasks.
+4. AI Assistant sends user messages to the Express backend.
+5. Backend communicates with OpenAI API and returns responses.
+
+---
+
+## Challenges Faced
+
+* Handling API authentication and errors.
+* Managing asynchronous data fetching.
+* Deploying the project on Vercel.
+* Connecting frontend and backend services.
+
+---
+
+## Future Improvements
+
+* Real-time weather and news updates.
+* Better UI/UX design.
+* User authentication.
+* Calendar integration.
+* GitHub activity tracking.
+* System monitoring widgets.
+* Advanced AI agent with tool calling capabilities.
+
+---
+
+## Evaluation Criteria Addressed
+
+### Logical Flow
+
+Organized dashboard with clearly separated widgets.
+
+### Problem Solving
+
+Implemented API integration, task management, deployment, and backend communication.
+
+### AI Tool Usage
+
+Integrated AI assistant architecture using OpenAI API.
+
+### Neatness
+
+Simple, clean, and user-friendly dashboard layout.
+
+---
+
+## Author
+
+Karthik
+
+AI Agent Dashboard – Technical Assessment Project
