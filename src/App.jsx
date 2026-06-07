@@ -6,25 +6,64 @@ function App() {
     const [tasks, setTasks] = useState([]);
     const [taskInput, setTaskInput] = useState("");
 
+    const weatherApiKey = import.meta.env.VITE_OPENWEATHER_KEY;
+    const newsApiKey = import.meta.env.VITE_NEWSAPI_KEY;
+
     useEffect(() => {
         fetchWeather();
         fetchNews();
     }, []);
 
     const fetchWeather = async () => {
-        const res = await fetch(
-            "https://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_API_KEY&units=metric"
-        );
-        const data = await res.json();
-        setWeather(data);
+        if (!weatherApiKey) {
+            console.error("Missing OpenWeather API key");
+            setWeather(null);
+            return;
+        }
+
+        try {
+            const res = await fetch(
+                `https://api.openweathermap.org/data/2.5/weather?q=London&appid=${weatherApiKey}&units=metric`
+            );
+            const data = await res.json();
+
+            if (!res.ok) {
+                console.error("Weather API error", data);
+                setWeather(null);
+                return;
+            }
+
+            setWeather(data);
+        } catch (error) {
+            console.error("Weather fetch failed", error);
+            setWeather(null);
+        }
     };
 
     const fetchNews = async () => {
-        const res = await fetch(
-            "https://newsapi.org/v2/top-headlines?category=technology&country=us&apiKey=YOUR_API_KEY"
-        );
-        const data = await res.json();
-        setNews(data.articles.slice(0, 5));
+        if (!newsApiKey) {
+            console.error("Missing NewsAPI key");
+            setNews([]);
+            return;
+        }
+
+        try {
+            const res = await fetch(
+                `https://newsapi.org/v2/top-headlines?category=technology&country=us&apiKey=${newsApiKey}`
+            );
+            const data = await res.json();
+
+            if (!res.ok || !data.articles) {
+                console.error("News API error", data);
+                setNews([]);
+                return;
+            }
+
+            setNews(data.articles.slice(0, 5));
+        } catch (error) {
+            console.error("News fetch failed", error);
+            setNews([]);
+        }
     };
 
     const addTask = () => {
@@ -48,21 +87,27 @@ function App() {
                 <div>
                     <h2>Weather</h2>
 
-                    {weather && (
+                    {weather ? (
                         <>
                             <p>City: {weather.name}</p>
-                            <p>Temp: {weather.main.temp}°C</p>
-                            <p>{weather.weather[0].description}</p>
+                            <p>Temp: {weather?.main?.temp}°C</p>
+                            <p>{weather?.weather?.[0]?.description}</p>
                         </>
+                    ) : (
+                        <p>Weather data unavailable. Check your API key and network.</p>
                     )}
                 </div>
 
                 <div>
                     <h2>Tech News</h2>
 
-                    {news.map((item, index) => (
-                        <p key={index}>{item.title}</p>
-                    ))}
+                    {news.length > 0 ? (
+                        news.map((item, index) => (
+                            <p key={index}>{item.title}</p>
+                        ))
+                    ) : (
+                        <p>News data unavailable. Check your API key and network.</p>
+                    )}
                 </div>
 
                 <div>

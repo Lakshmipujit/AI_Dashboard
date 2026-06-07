@@ -12,21 +12,39 @@ const client = new OpenAI({
 });
 
 app.post("/chat", async (req, res) => {
-    const { message } = req.body;
+    try {
+        const { message } = req.body;
 
-    const response = await client.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages: [
-            {
-                role: "user",
-                content: message,
-            },
-        ],
-    });
+        if (!message) {
+            return res.status(400).json({
+                error: "Message is required",
+            });
+        }
 
-    res.json({
-        reply: response.choices[0].message.content,
-    });
+        const response = await client.chat.completions.create({
+            model: "gpt-4o-mini",
+            messages: [
+                {
+                    role: "user",
+                    content: message,
+                },
+            ],
+        });
+
+        res.json({
+            reply: response.choices[0].message.content,
+        });
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            error: "Failed to generate response",
+        });
+    }
+});
+
+app.get("/", (req, res) => {
+    res.send("AI Dashboard Backend Running");
 });
 
 app.listen(5000, () => {
