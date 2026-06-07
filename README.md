@@ -148,6 +148,6 @@ Simple, clean, and user-friendly dashboard layout.
 
 ## Author
 
-Karthik
+Lakshmi Pujitha Chaganti
 
 AI Agent Dashboard – Technical Assessment Project
